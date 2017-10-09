@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "instagram-nodejs-without-api": "^0.2.8"
+    "instagram-nodejs-without-api": "^0.2.8",
+    "instagram-private-api": "^0.6.7"
   }
 }
