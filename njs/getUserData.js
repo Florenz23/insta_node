@@ -1,5 +1,7 @@
 var _ = require('lodash');
 var Promise = require('bluebird');
+var fs = require('fs'),
+request = require('request');
 
 
 var Client = require('instagram-private-api').V1;
@@ -9,6 +11,15 @@ var jsonfile = require('jsonfile')
 var pathOrStream = './img/test.jpg';
 
 var userId = 1531281932
+
+var download = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
 
 function writeFile(data) {
   var file = './data/data.json'
@@ -31,7 +42,7 @@ Client.Session.create(device, storage, 'realegon', 'asdfasdf')
       // console.log(media[0]._params.commentCount)
       // console.log(media[0]._params.deviceTimestamp)
       // console.log(media[0]._params.webLink)
-      console.log(media[4]._params)
+      // console.log(media[4]._params)
     	var postInfo = _.map(media, function(medium) {
         if (medium._params.mediaType == 1) {
       		return {
@@ -47,5 +58,8 @@ Client.Session.create(device, storage, 'realegon', 'asdfasdf')
     	});
       // var postInfoJson = JSON.stringify(postInfo);
       writeFile(postInfo)
+      download(postInfo[0].img, './download/image.jpg', function(){
+        console.log('done');
+      });
     })
   })
