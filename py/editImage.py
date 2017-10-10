@@ -8,7 +8,7 @@ def readImage(imgPath):
     draw = ImageDraw.Draw(img)
     return (img, draw)
 
-def createImageWithText(img, draw, imgPath, msg,index):
+def createImageWithText(img, draw, imgPath, msg):
     font = ImageFont.truetype("Cubano-Regular.otf", 45)
     W, H = (1080,1080)
     multi = 1080 / 300
@@ -17,7 +17,7 @@ def createImageWithText(img, draw, imgPath, msg,index):
     w, h = draw.textsize(msg)
     new_w = W-w*multi
     draw.multiline_text(((W-w*multi)/2,(H/3)), msg, fill='black', font=font, anchor=10, spacing=10, align="center")
-    img.save('../img/image_ready_%d.jpg' % index)
+    img.save(imgPath)
     return img
 
 def createAllImages(text,index):
@@ -25,7 +25,7 @@ def createAllImages(text,index):
     saveImagePath = '../img/image_ready_%d.jpg' % index
     msg = "Mentors are great,but some of the greatest mentor are no longer alive"
     (img, draw) = readImage(imagePath)
-    img = createImageWithText(img, draw, saveImagePath, text, index)
+    img = createImageWithText(img, draw, saveImagePath, text)
     img.show()
 
 def start(stringArray):
