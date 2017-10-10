@@ -21,12 +21,20 @@ def createImageWithText(img, draw, imgPath, msg):
     img.save('../img/image_ready_%d.jpg' % index)
     return img
 
+def createAllImages(text):
+    index = 10
+    imagePath = "../img/white.jpg"
+    saveImagePath = '../img/image_ready_%d.jpg' % index
+    msg = "Mentors are great,but some of the greatest mentor are no longer alive"
+    (img, draw) = readImage(imagePath)
+    img = createImageWithText(img, draw, saveImagePath, text)
+    img.show()
+
+quotes = [
+    "Mentors are great,but some of the greatest mentor are no longer alive1",
+    "Mentors are great,but some of the greatest mentor are no longer alive2",
+    "Mentors are great,but some of the greatest mentor are no longer alive3",
+]
+createAllImages(quotes[0])
 
 # font = ImageFont.truetype(<font-file>, <font-size>)
-index = 10
-imagePath = "../img/white.jpg"
-saveImagePath = '../img/image_ready_%d.jpg' % index
-msg = "Mentors are great,but some of the greatest mentor are no longer alive"
-(img, draw) = readImage(imagePath)
-img = createImageWithText(img, draw, saveImagePath, msg)
-img.show()
