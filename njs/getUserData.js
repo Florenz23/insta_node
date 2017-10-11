@@ -16,7 +16,6 @@ var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
     console.log('content-type:', res.headers['content-type']);
     console.log('content-length:', res.headers['content-length']);
-
     request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
   });
 };
@@ -26,6 +25,19 @@ function writeFile(data) {
   jsonfile.writeFile(file, data, function (err) {
     console.error(err)
   })
+}
+
+function createPostInfoObject(params){
+  let obj = {
+    "url": params.webLink,
+    "img": params.images[0].url,
+    "likes": params.likeCount,
+    "comments": params.commentCount,
+    "time": params.deviceTimestamp,
+    "type": params.mediaType,
+  }
+
+  return obj
 }
 // And go for login
 Client.Session.create(device, storage, 'realegon', 'asdfasdf')
@@ -45,14 +57,7 @@ Client.Session.create(device, storage, 'realegon', 'asdfasdf')
       // console.log(media[4]._params)
     	var postInfo = _.map(media, function(medium) {
         if (medium._params.mediaType == 1) {
-      		return {
-            "url": medium._params.webLink,
-            "img": medium._params.images[0].url,
-            "likes": medium._params.likeCount,
-            "comments": medium._params.commentCount,
-            "time": medium._params.deviceTimestamp,
-            "type": medium._params.mediaType,
-          }
+      		return createPostInfoObject(medium._params) 
         }
     		// return _.last(medium.images)
     	});
