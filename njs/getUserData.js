@@ -12,7 +12,11 @@ var userId = 1531281932
 function writeFile(data) {
   var file = './data/data.json'
   jsonfile.writeFile(file, data, function (err) {
-    console.error(err)
+    if(err){
+      console.error(err)
+    } else {
+      console.log("json saved")
+    }
   })
 }
 
@@ -28,11 +32,17 @@ function createPostInfoObject(params){
 
   return obj
 }
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+    });
+}
 // And go for login
 Client.Session.create(device, storage, 'realegon', 'asdfasdf')
   .then(function(session){
     var feed = new Client.Feed.UserMedia(session, userId);
-    Promise.mapSeries(_.range(0, 2), function() {
+    Promise.mapSeries(_.range(0, 30), function() {
     	return feed.get();
     })
     .then(function(results) {
@@ -42,6 +52,8 @@ Client.Session.create(device, storage, 'realegon', 'asdfasdf')
       		return createPostInfoObject(medium._params)
         }
     	});
+      postInfo = sortByKey(postInfo,"likes")
+      console.log(postInfo.length)
       writeFile(postInfo)
     })
   })
