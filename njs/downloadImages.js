@@ -1,6 +1,8 @@
 var fs = require('fs'),
 request = require('request');
 
+var postInfo = require('./data/data.json')
+
 var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
     console.log('content-type:', res.headers['content-type']);
@@ -9,6 +11,10 @@ var download = function(uri, filename, callback){
   });
 };
 
-download(postInfo[0].img, './download/image.jpg', function(){
-    console.log('done');
-});
+function start() {
+  download(postInfo[0].img, './download/image.jpg', function(){
+      console.log('done');
+  });
+}
+
+start()
