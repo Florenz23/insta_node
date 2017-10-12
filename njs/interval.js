@@ -1,13 +1,19 @@
 function postImage(){
-  console.log("moin")
+  console.log(new Date())
 }
-function start() {
-  let i = 0;
-  var interval = setInterval(function(str1, str2) {
-    i++
-    console.log(str1 +i+ " " + str2);
-    postImage()
-  }, 1000*1*1, "Hello.", "How are you?");
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-start()
+
+function startTimer(from,to) {}
+
+(function loop() {
+    var rand = getRandomInt(1*1000,3*1000);
+    setTimeout(function() {
+            startTimer();
+            loop();
+            postImage()
+    }, (1000*1+rand));
+}());
+startTimer()
 //Mili, Sekunden, Minuten
