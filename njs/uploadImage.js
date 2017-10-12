@@ -26,24 +26,27 @@ function uploadImageToInstagram(caption, image_url) {
 }
 function setImageUrl() {
   let image_url
+  let root_url = "../img/"
   image_url = ""
   if (counter_post == 0 || counter_post == 2 || counter_post == 6 || counter_post == 8){
-    image_url = `../img/quote_normal/quote_normal_${counter_quote_normal}.jpg`;
+    image_url = `${root_url}quote_normal/quote_normal_${counter_quote_normal}.jpg`;
+    counter_quote_normal ++
   }
   if (counter_post == 1){
-    image_url = `../img/image_ready/regular/doit.jpg`;
+    image_url = `${root_url}image_ready/regular/doit.jpg`;
   }
   if (counter_post == 3){
-    image_url = `../img/image_ready/regular/teach.jpg`;
+    image_url = `${root_url}image_ready/regular/teach.jpg`;
   }
   if (counter_post == 5){
-    image_url = `../img/image_ready/regular/read.jpg`;
+    image_url = `${root_url}image_ready/regular/read.jpg`;
   }
   if (counter_post == 7){
-    image_url = `../img/image_ready/regular/live.jpg`;
+    image_url = `${root_url}image_ready/regular/live.jpg`;
   }
   if (counter_post == 4){
-    image_url = `../img/quote_bam/quote_bam${counter_quote_bam}.jpg`;
+    image_url = `${root_url}quote_bam/quote_bam_${counter_quote_bam}.jpg`;
+    counter_quote_bam ++
   }
   return image_url
 }
@@ -58,13 +61,11 @@ function post(){
 }
 
 function manageCounter(){
+  counter_post ++
   if (counter_post == 9) {
     counter_post = 0
   }
-  counter_quote_normal ++
-  counter_quote_bam ++
-  counter_post ++
-  console.log(counter_quote_normal)
+  console.log(counter_post)
 }
 (function loop() {
     var rand = getRandomInt(1*1000,3*1000);
@@ -72,5 +73,6 @@ function manageCounter(){
             loop()
             post()
             manageCounter()
-    }, (1000*1+rand))
+    // }, (1000*1+rand))
+  }, (1000*1))
 }());
