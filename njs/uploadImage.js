@@ -56,7 +56,7 @@ function post(){
   var caption = '\n•\n•\n•\n•\n•\n•\n#work #success #working #grind #founder #startup #money #motivationquotes #moneymaker #motivationdaily #startuplife #successful #motivationiskey #inspiredaily #hardwork #hardworkpaysoff #desire #motivation #motivational #lifestyle #happiness #entrepreneur #entrepreneurs #entrepreneurship #entrepreneurlife #business #businessman #quoteoftheday #businessowner #businesswoman'
 
   console.log(image_url)
-  // uploadImageToInstagram(caption,image_url)
+  uploadImageToInstagram(caption,image_url)
 
 }
 
@@ -68,11 +68,13 @@ function manageCounter(){
   console.log(counter_post)
 }
 (function loop() {
-    var rand = getRandomInt(1*1000,3*1000);
+    var rand = getRandomInt(1000*60*1,1000*60*3);
     setTimeout(function() {
             loop()
-            post()
-            manageCounter()
-    // }, (1000*1+rand))
-  }, (1000*1))
+            if (new Date().getHours() > 6){
+              post()
+              manageCounter()
+            }
+    }, (1000*60*60*3+rand))
+  // }, (1000*1))
 }());

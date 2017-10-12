@@ -9,6 +9,7 @@ function startTimer(from,to) {}
 
 (function loop() {
     var rand = getRandomInt(1*1000,3*1000);
+    console.log(new Date().getHours())
     setTimeout(function() {
             startTimer();
             loop();
