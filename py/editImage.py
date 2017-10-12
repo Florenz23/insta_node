@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# bam, color white, size 60, name img/post/images/image_bam/imabe_bam_0
+
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
@@ -13,6 +15,8 @@ def readImage(imgPath):
 
 def createImageWithText(img, draw, imgPath, msg, fontColor):
     # font = ImageFont.truetype("Cubano-Regular.otf", 45)
+    # regular
+    # font = ImageFont.truetype("Roboto-BlackItalic.ttf", 80)
     font = ImageFont.truetype("Roboto-BlackItalic.ttf", 60)
     W, H = (1080,1080)
     multi = 1080 / 300
@@ -28,7 +32,12 @@ def createImageWithText(img, draw, imgPath, msg, fontColor):
 def createSpecificImage(text,index,color):
 
     imagePath = "../img/%s.jpg" % color
-    saveImagePath = '../img/image_ready/%s_%d.jpg' % (color,index)
+    # imagePath = "../img/pic.jpg"
+    saveImagePath = "../img/post_images/quote/quote_normal_%d.jpg" % index
+    # saveImagePath = "../img/post_images/check/quote_normal_%d.jpg" % index
+    # saveImagePath = '../img/post_images/quote_normaml/quote_bam__%d.jpg' % index
+    # saveImagePath = '../img/post_images/regular/reg_%d.jpg' % index
+    # saveImagePath = '../img/post_images/image_ready/%s_%d.jpg' % (color,index)
     msg = "Mentors are great,but some of the greatest mentor are no longer alive"
     (img, draw) = readImage(imagePath)
     if color == "white":
@@ -41,8 +50,6 @@ def createSpecificImage(text,index,color):
 
 def createAllImages(text,index):
     createSpecificImage(text,index,"white")
-    createSpecificImage(text,index,"black")
-    createSpecificImage(text,index,"pic")
 
 def start(stringArray):
     for i in range (0,len(stringArray)):
@@ -56,7 +63,8 @@ def readQuotesFromFile(filename):
     return content
 
 
-fileName = 'quotes.json'
+# fileName = 'quote_regular.json'
+fileName = 'quote_normal.json'
 quotes = readQuotesFromFile(fileName)
 
 start(quotes)
