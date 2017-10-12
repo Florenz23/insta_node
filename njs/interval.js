@@ -15,5 +15,4 @@ function startTimer(from,to) {}
             postImage()
     }, (1000*1+rand));
 }());
-startTimer()
 //Mili, Sekunden, Minuten
